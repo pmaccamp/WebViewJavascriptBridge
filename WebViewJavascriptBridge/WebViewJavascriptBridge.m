@@ -169,8 +169,10 @@ static bool logging = false;
         NSString* responseId = message[@"responseId"];
         if (responseId) {
             WVJBResponseCallback responseCallback = _responseCallbacks[responseId];
-            responseCallback(message[@"responseData"]);
-            [_responseCallbacks removeObjectForKey:responseId];
+            if(responseCallback != nil){
+                responseCallback(message[@"responseData"]);
+                [_responseCallbacks removeObjectForKey:responseId];
+            }
         } else {
             WVJBResponseCallback responseCallback = NULL;
             NSString* callbackId = message[@"callbackId"];
