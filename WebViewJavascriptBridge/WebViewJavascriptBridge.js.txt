@@ -85,6 +85,8 @@
 				} catch(exception) {
 					if (typeof console != 'undefined') {
 						console.log("WebViewJavascriptBridge: WARNING: javascript handler threw.", message, exception)
+						callHandler("logErrors", message, nil);
+						callHandler("logErrors", exception, nil);
 					}
 				}
 			}
