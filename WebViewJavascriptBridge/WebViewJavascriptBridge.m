@@ -79,7 +79,7 @@ static bool logging = false;
 }
 
 - (BOOL)pendingCallbacks {
-    return [_responseCallbacks allKeys].count > 0
+    return [_responseCallbacks allKeys].count > 0;
 }
 
 /* Platform agnostic internals
