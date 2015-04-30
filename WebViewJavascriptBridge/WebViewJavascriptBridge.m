@@ -82,6 +82,10 @@ static bool logging = false;
     return [_responseCallbacks allKeys].count > 0;
 }
 
+- (void)purgeResponseCallbacks {
+    _responseCallbacks = [NSMutableDictionary dictionary];
+}
+
 /* Platform agnostic internals
  *****************************/
 
