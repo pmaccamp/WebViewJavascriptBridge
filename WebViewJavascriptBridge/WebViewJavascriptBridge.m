@@ -78,6 +78,10 @@ static bool logging = false;
     _messageHandlers[handlerName] = [handler copy];
 }
 
+- (BOOL)pendingCallbacks {
+    return [_responseCallbacks allKeys].count > 0
+}
+
 /* Platform agnostic internals
  *****************************/
 
