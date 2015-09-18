@@ -180,6 +180,8 @@ static bool logging = false;
             if(responseCallback != nil){
                 responseCallback(message[@"responseData"]);
                 [_responseCallbacks removeObjectForKey:responseId];
+            } else {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"MissingResponseCallback" object:message];
             }
         } else {
             WVJBResponseCallback responseCallback = NULL;
