@@ -208,11 +208,9 @@ static bool logging = false;
                 handler = _messageHandler;
             }
 
-            if (!handler) {
-                [NSException raise:@"WVJBNoHandlerException" format:@"No handler for message from JS: %@", message];
+            if (handler) {
+                handler(message[@"data"], responseCallback);
             }
-            
-            handler(message[@"data"], responseCallback);
         }
     }
 }
