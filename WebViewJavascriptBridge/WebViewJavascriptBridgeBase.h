@@ -40,5 +40,7 @@ typedef NSDictionary WVJBMessage;
 - (void)dispatchStartUpMessageQueue;
 - (NSString *)webViewJavascriptCheckCommand;
 - (NSString *)webViewJavascriptFetchQueyCommand;
+- (BOOL)pendingCallbacks;
+- (void)purgeResponseCallbacks;
 
 @end

@@ -36,7 +36,5 @@
 - (void)callHandler:(NSString*)handlerName;
 - (void)callHandler:(NSString*)handlerName data:(id)data;
 - (void)callHandler:(NSString*)handlerName data:(id)data responseCallback:(WVJBResponseCallback)responseCallback;
-- (BOOL)pendingCallbacks;
-- (void)purgeResponseCallbacks;
 
 @end

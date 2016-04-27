@@ -43,6 +43,14 @@ static bool logging = false;
     _uniqueId = 0;
 }
 
+- (BOOL)pendingCallbacks {
+    return [self.responseCallbacks allKeys].count > 0;
+}
+
+- (void)purgeResponseCallbacks {
+    self.responseCallbacks = [NSMutableDictionary dictionary];
+}
+
 - (void)sendData:(id)data responseCallback:(WVJBResponseCallback)responseCallback handlerName:(NSString*)handlerName {
     NSMutableDictionary* message = [NSMutableDictionary dictionary];
     

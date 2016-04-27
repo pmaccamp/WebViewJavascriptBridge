@@ -69,14 +69,6 @@
     _base.messageHandlers[handlerName] = [handler copy];
 }
 
-- (BOOL)pendingCallbacks {
-    return [_base.responseCallbacks allKeys].count > 0;
-}
-
-- (void)purgeResponseCallbacks {
-    _base.responseCallbacks = [NSMutableDictionary dictionary];
-}
-
 /* Platform agnostic internals
  *****************************/
 
