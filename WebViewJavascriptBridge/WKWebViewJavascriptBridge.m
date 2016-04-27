@@ -38,6 +38,14 @@
     return bridge;
 }
 
+- (BOOL)pendingCallbacks {
+    return [_base pendingCallbacks];
+}
+
+- (void)purgeResponseCallbacks {
+    return [_base purgeResponseCallbacks];
+}
+
 - (void)send:(id)data {
     [self send:data responseCallback:nil];
 }
