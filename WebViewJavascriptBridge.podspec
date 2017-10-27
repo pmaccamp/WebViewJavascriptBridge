@@ -11,6 +11,7 @@ Pod::Spec.new do |s|
   
   s.ios.source_files         = 'WebViewJavascriptBridge/*.{h,m}'
   s.ios.private_header_files = 'WebViewJavascriptBridge/WebViewJavascriptBridge_JS.h'
+  s.osx.private_header_files = 'WebViewJavascriptBridge/WebViewJavascriptBridge_JS.h'
   s.osx.source_files         = 'WebViewJavascriptBridge/*.{h,m}'
   s.osx.private_header_files = 'WebViewJavascriptBridge/WebViewJavascriptBridge_JS.h'
   
