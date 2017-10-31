@@ -110,7 +110,7 @@ NSString * WebViewJavascriptBridge_js() {
                         handler(message.data, responseCallback)
                     } catch(exception) {
                         if (typeof console != 'undefined') {
-                            console.log("WebViewJavascriptBridge: WARNING: javascript handler threw.", message, exception)
+                            console.log("WebViewJavascriptBridge: WARNING: javascript handler threw.", message, exception);
                             callHandler("logErrors", message.callbackId + ":" + message.handlerName + ":" +message.data + "\n" + exception.stack + "\n" + exception.message, null);
                         }
                     }
