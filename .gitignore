@@ -9,3 +9,5 @@
 *.xcuserstate
 *.xcworkspace/
 xcuserdata/
+.idea/
+*/.idea/
