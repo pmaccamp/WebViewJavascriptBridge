@@ -13,9 +13,9 @@
 #endif
 
 #if __has_feature(objc_arc_weak)
-    #define WVJB_WEAK __weak
+#define WVJB_WEAK __weak
 #else
-    #define WVJB_WEAK __unsafe_unretained
+#define WVJB_WEAK __unsafe_unretained
 #endif
 
 @implementation WebViewJavascriptBridge {
@@ -39,18 +39,7 @@
     return [self bridge:webView];
 }
 + (instancetype)bridge:(id)webView {
-#if defined supportsWKWebView
-    if ([webView isKindOfClass:[WKWebView class]]) {
-        return (WebViewJavascriptBridge*) [WKWebViewJavascriptBridge bridgeForWebView:webView];
-    }
-#endif
-    if ([webView isKindOfClass:[WVJB_WEBVIEW_TYPE class]]) {
-        WebViewJavascriptBridge* bridge = [[self alloc] init];
-        [bridge _platformSpecificSetup:webView];
-        return bridge;
-    }
-    [NSException raise:@"BadWebViewType" format:@"Unknown web view type."];
-    return nil;
+    return (WebViewJavascriptBridge*) [WKWebViewJavascriptBridge bridgeForWebView:webView];
 }
 
 - (void)setWebViewDelegate:(WVJB_WEBVIEW_DELEGATE_TYPE*)webViewDelegate {
@@ -97,21 +86,6 @@
     [_base disableJavscriptAlertBoxSafetyTimeout];
 }
 
-
-/* Platform agnostic internals
- *****************************/
-
-- (void)dealloc {
-    [self _platformSpecificDealloc];
-    _base = nil;
-    _webView = nil;
-    _webViewDelegate = nil;
-}
-
-- (NSString*) _evaluateJavascript:(NSString*)javascriptCommand {
-    return [_webView stringByEvaluatingJavaScriptFromString:javascriptCommand];
-}
-
 #if defined WVJB_PLATFORM_OSX
 /* Platform specific internals: OSX
  **********************************/
@@ -129,7 +103,7 @@
 
 - (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener {
     if (webView != _webView) { return; }
-    
+
     NSURL *url = [request URL];
     if ([_base isWebViewJavascriptBridgeURL:url]) {
         if ([_base isBridgeLoadedURL:url]) {
@@ -146,23 +120,6 @@
     } else {
         [listener use];
     }
-}
-
-
-
-#elif defined WVJB_PLATFORM_IOS
-/* Platform specific internals: iOS
- **********************************/
-
-- (void) _platformSpecificSetup:(WVJB_WEBVIEW_TYPE*)webView {
-    _webView = webView;
-    _webView.delegate = self;
-    _base = [[WebViewJavascriptBridgeBase alloc] init];
-    _base.delegate = self;
-}
-
-- (void) _platformSpecificDealloc {
-    _webView.delegate = nil;
 }
 
 #endif
